@@ -23,7 +23,7 @@
 # --- VERTEX GROUPS ---
 
 # Light group:
-# Faces that represent light beams (e.g., from car headlights or street lights) should have their vertices assigned to a group named 'light'.
+# Faces that represent light beams (e.g., from car headlights or street lights) should have their vertices assigned to a group named "light".
 # These faces will be assigned special flag values.
 # Use the colours at indices [43,55] in the palette; SimCopter remaps this range to a grey gradient near the end of the palette.
 # Car headlights use four faces set to the colours at indices 43, 53, 54, and 55 (from nearest the car to furthest away from it).
@@ -48,9 +48,9 @@ import bpy
 # ========================
 
 # This should point to a palette in GIMP palette format exported by the Maxis Texture Tool (https://github.com/CahootsMalone/maxis-texture-tool/releases).
-palettePath = 'C:/Stuff IV/Maxis file format stuff/Arbitrary mesh/pal_sc.gpl'
+palettePath = '[...]/palette.gpl'
 
-outPath = 'C:/Stuff IV/Maxis file format stuff/Wienermobile/outWienermobile.bin'
+outPath = '[...]/out.bin'
 
 # Dimensions of collision box.
 # Actual dimension seems to be value*10,000 (e.g., 64 = 640,000 SimCopter units).
