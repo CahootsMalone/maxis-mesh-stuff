@@ -57,9 +57,15 @@ outPath = '[...]/out.bin'
 # There's a bug in SimCopter: the collision box is checked in global coordinates instead of rotating with the mesh.
 # For example, compare walking parallel to the fire engine when it's facing north/south to doing the same when it's facing east/west.
 # Accordingly, it's best to make the two horizontal dimensions equal.
-collisionHorizontalDim1 = 81 # Width/length of collision box.
-collisionHorizontalDim2 = 81 # Length/width of collision box.
-collisionVerticalDim = 21 # Height of collision box.
+collisionHorizontalDim1 = 80 # Width/length of collision box.
+collisionHorizontalDim2 = 80 # Length/width of collision box.
+collisionVerticalDim = 20 # Height of collision box.
+
+# Coordinates of origin in Blender units.
+# It's unclear how/if the origin is used.
+originX = 0
+originY = 0
+originZ = 0
 
 # ======================
 # === END PARAMETERS ===
@@ -68,9 +74,9 @@ collisionVerticalDim = 21 # Height of collision box.
 def write_vertex(file, x, y, z):
     # Blender: +Z = up, RHR.
     # SC: +X = right, +Y = up, +Z = forward, LHR.
-    file.write((x).to_bytes(4, byteorder='little', signed=True))
-    file.write((z).to_bytes(4, byteorder='little', signed=True))
-    file.write((y).to_bytes(4, byteorder='little', signed=True))
+    file.write(round(CONST_SCALE_FACTOR*x).to_bytes(4, byteorder='little', signed=True))
+    file.write(round(CONST_SCALE_FACTOR*z).to_bytes(4, byteorder='little', signed=True))
+    file.write(round(CONST_SCALE_FACTOR*y).to_bytes(4, byteorder='little', signed=True))
 
 # At this scale factor, a car wheel is about 2.3 Blender units in diameter (i.e., 230,000 SimCopter units).
 CONST_SCALE_FACTOR = 100000
@@ -99,7 +105,7 @@ with open(outPath, 'wb') as file:
     file.write(collisionHorizontalDim1.to_bytes(1, byteorder='little'))
     file.write(collisionHorizontalDim2.to_bytes(1, byteorder='little'))
     file.write(collisionVerticalDim.to_bytes(1, byteorder='little'))
-    file.write((0).to_bytes(1, byteorder='little')) # Always zero.
+    file.write((0).to_bytes(1, byteorder='little')) # Almost always zero.
     
     file.write((0).to_bytes(4, byteorder='little')) # Always zero.
     nameBytes = bytearray(b'Wienermobile\0')
@@ -108,13 +114,10 @@ with open(outPath, 'wb') as file:
     file.write(b'DEADDEADDEAD') # Mystery 12-byte sequence; must be replaced on import with the 12-byte sequence of the mesh being replaced.
 
     # Vertices
-    write_vertex(file, 0, 0, 0) # Origin (seems like origin isn't used, at least for cars)
+    write_vertex(file, originX, originY, originZ) # Origin (always the first vertex).
     for vertex in theMesh.vertices:
         # Note that these coordinates are expressed in the object's local coordinate system.
-        sX = round(CONST_SCALE_FACTOR*vertex.co.x)
-        sY = round(CONST_SCALE_FACTOR*vertex.co.y)
-        sZ = round(CONST_SCALE_FACTOR*vertex.co.z)
-        write_vertex(file, sX, sY, sZ)
+        write_vertex(file, vertex.co.x, vertex.co.y, vertex.co.z)
     
     # Faces
     for face in theMesh.polygons:
