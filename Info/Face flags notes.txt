@@ -1,0 +1,48 @@
+Flag values that appear to be associated with faces that should be solid colours:
+        0000000000000000
+16386 = 0100000000000010
+    uses shading/gradient
+    most of helicopter, grass part of baseball diamond, building roofs, buttresses of Braun Llama Dome, tubes at base of launch arcology and mountain inside, fuselages of cessna and f-16, person part of statue
+    Not affected by day/night
+2050 =  0000100000000010 
+    bleachers of baseball diamond, light surface of street lamps
+    Affected by day/night
+        Bleachers of baseball diamond are (color index: 48, darkest colour in grey gradient)
+        Light surface of street light isn't (color index: 255, white on its own at end of palette)
+    Affected by orientation (shaded)
+3 =                   11
+    helicopter windows, helicopter tail fins, dirt part of baseball diamond, building roofs, cars
+    Affected by day/night
+        Dirt in baseball diamond is (color index: 208, start of brown gradient)
+        Cars aren't
+    Affected by orientation (phone booth; hard to tell with helicopter tail fins; obvious with cars)
+
+Flag values associated with textured faces:
+        0000000000000000
+8194 =  0010000000000010
+          ^ seems like that bit means "use a texture"
+
+Flag values associated with vertex cluster "faces":
+        0000000000000000
+22 =               10110
+32770 = 1000000000000010 (vertex clusters)
+
+Unknown:
+        0000000000000000
+2 =                   10 (might be for translucent faces; shows up in tunnel segment meshes and shadows; also some vertex clusters; also some lights)
+    In SimCopter at least, used for conditional faces (e.g., light from cars that only appears at night)
+
+General observations:
+- Second bit is always set. Weird that translucent faces have just it set.
+- Third-highest bit seems to indicate that texture should be used.
+- For some "solid colour" flags, the "mystery byte" appears to be the index of the palette (i.e., face doesn't use the general palette at the start of the MAX file).
+- When texFile == 0, texNum and group number are set to the same value (the palette index).
+
+
+Mystery byte:
+     00000000
+11 (0x0B) =     1011 (appears with flags 2)
+15 (0x0F) =    01111 (appears with flags 3, 2050)
+18 (0x12) =    10010 (appears with flags 8194 - textured faces)
+19 (0x13) =    10011 (appears with flags 16386)
+20 (0x14) =    10100 (appears with flags 32700)

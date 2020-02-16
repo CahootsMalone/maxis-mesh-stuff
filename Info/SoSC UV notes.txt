@@ -1,0 +1,36 @@
+Face 1 (pickup bed) of P_CAR1
+
+46 41 43 45
+3D 00 00 00
+04 00
+02 20
+00 00
+00 00 00 00
+0D
+5E
+00
+
+Vertex indices
+01 00
+02 00
+04 00
+03 00
+
+Mystery data, probably U,V
+6E 7A 00 00 1A 5F 00 00 A,B
+6E 7A 00 00 C7 01 00 00 A,C1
+9A 44 00 00 C6 01 00 00 D,C2
+9A 44 00 00 1A 5F 00 00 D,B
+
+6E 7A = 31342
+1A 5F = 24346
+9A 44 = 17562
+C7 01 = 455
+
+Appears that you divide by 65536 to get value in [0, 1]
+
+From image, approximate coordinates of corners
+Top left: 33, 48 = 0.257, 0.375
+Top right: 61, 48 = 0.477, 0.375
+Bottom left: 33, 0 = 0.257, 0.000
+Bottom right: 61, 0 = 0.477, 0.000

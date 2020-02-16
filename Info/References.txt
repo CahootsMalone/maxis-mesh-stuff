@@ -1,0 +1,6 @@
+https://sourceforge.net/p/miscopter/wiki/MAXFormat/
+
+https://github.com/wyozi/Maxis-formats
+
+Haffmans forked Wyozi's repo; I've added info to it.
+https://github.com/haffmans/Maxis-formats

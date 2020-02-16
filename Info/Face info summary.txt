@@ -1,0 +1,63 @@
+Based on the output of tabulate-face-info.py.
+
+=== Unique Values ===
+
+--- isLight ---
+0: not a light
+1: vertex lights
+4: face lights
+
+--- flags ---
+2: vertices and faces
+3: only faces
+22: only edges
+2050: only faces
+8194: only faces
+8214: only edges (only one edge has this flag value)
+16386: only faces
+32770: only edges
+
+flags notes
+    2 is the only flag value used for standalone vertices
+    Standalone edges use only flag values 22, 8214, and 32770
+    
+--- mystery byte ---
+2: only edges
+11: only faces
+13: only faces
+15: only faces
+18: only faces
+19: only faces
+20: only edges
+25: only vertices
+26: only vertices
+
+    76543210
+2:  00000010
+11: 00001011
+13: 00001101
+15: 00001111
+18: 00010010
+19: 00010011
+20: 00010100
+25: 00011001
+26: 00011010
+
+Bits 7-5: never set
+Bit 4: appears for vertices, edges, and faces
+Bit 3: appears for vertices and faces
+Bit 2: appears for edges and faces
+Bit 1: appears for vertices, edges, and faces
+Bit 0: appears for vertice and faces
+
+=== Relationships ===
+
+flag -> mystery byte
+2: 11 (faces), 25 (vertices), 26 (vertices)
+3: 15 (faces)
+22: 2 (edges)
+2050: 15 (faces)
+8194: 13 (faces), 18 (faces) (vast majority are 18)
+8214: 2 (edges)
+16386: 19 (faces)
+32770: 20 (edges)
