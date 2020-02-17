@@ -52,14 +52,14 @@ palettePath = '[...]/palette.gpl'
 
 outPath = '[...]/out.bin'
 
-# Dimensions of collision box.
-# Actual dimension seems to be value*10,000 (e.g., 64 = 640,000 SimCopter units).
-# There's a bug in SimCopter: the collision box is checked in global coordinates instead of rotating with the mesh.
-# For example, compare walking parallel to the fire engine when it's facing north/south to doing the same when it's facing east/west.
-# Accordingly, it's best to make the two horizontal dimensions equal.
-collisionHorizontalDim1 = 80 # Width/length of collision box.
-collisionHorizontalDim2 = 80 # Length/width of collision box.
-collisionVerticalDim = 20 # Height of collision box.
+# Bytes (max value 255) that affect collision detection.
+# Unclear how they're used. They don't specify the dimensions of the collision volume (at least not directly).
+# (0,0,0) gives no collision.
+# (0,0,250) adds a large, offset collision volume.
+# Most combinations (e.g., 50,50,50) result in a small collision volume.
+col1 = 50
+col2 = 50
+col3 = 50
 
 # Coordinates of origin in Blender units.
 # It's unclear how/if the origin is used.
@@ -102,10 +102,10 @@ with open(outPath, 'wb') as file:
     file.write(faceCount.to_bytes(2, byteorder='little'))
     file.write((0).to_bytes(4, byteorder='little')) # Always zero.
     
-    file.write(collisionHorizontalDim1.to_bytes(1, byteorder='little'))
-    file.write(collisionHorizontalDim2.to_bytes(1, byteorder='little'))
-    file.write(collisionVerticalDim.to_bytes(1, byteorder='little'))
-    file.write((0).to_bytes(1, byteorder='little')) # Almost always zero.
+    file.write(col1.to_bytes(1, byteorder='little'))
+    file.write(col2.to_bytes(1, byteorder='little'))
+    file.write(col3.to_bytes(1, byteorder='little'))
+    file.write((0).to_bytes(1, byteorder='little')) # Almost always zero (in SimCopter, 4 of the 400 meshes have it set to 1 instead).
     
     file.write((0).to_bytes(4, byteorder='little')) # Always zero.
     nameBytes = bytearray(b'Wienermobile\0')
