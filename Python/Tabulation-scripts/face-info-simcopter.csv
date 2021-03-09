@@ -1,4 +1,4 @@
-vertexCount, flags, isLight, group, mystery, tex/color, texFile
+vertexCount, flags, isLight, group, face type, tex/color, texFile
 4, 3, 0, 160, 15, 160, 0
 4, 3, 0, 160, 15, 160, 0
 4, 3, 0, 160, 15, 160, 0

@@ -3,7 +3,7 @@ paths = ['sim3d1.max',
          'sim3d3.max']
 
 faces = []
-faces.append(['vertexCount', 'flags', 'isLight', 'group', 'mystery', 'tex/color', 'texFile'])
+faces.append(['vertexCount', 'flags', 'isLight', 'group', 'face type', 'tex/color', 'texFile'])
 
 for path in paths:
     with open(path, 'rb') as file:
@@ -15,10 +15,10 @@ for path in paths:
             flags = int.from_bytes(data[(i+10):(i+12)], byteorder='little')
             isLight = int.from_bytes(data[(i+12):(i+14)], byteorder='little')
             group = int.from_bytes(data[(i+14):(i+18)], byteorder='little')
-            mystery = int.from_bytes(data[(i+18):(i+19)], byteorder='little')
+            faceType = int.from_bytes(data[(i+18):(i+19)], byteorder='little')
             texColor = int.from_bytes(data[(i+19):(i+20)], byteorder='little')
             texFile = int.from_bytes(data[(i+20):(i+21)], byteorder='little')
-            faces.append([vertexCount, flags, isLight, group, mystery, texColor, texFile])
+            faces.append([vertexCount, flags, isLight, group, faceType, texColor, texFile])
 
 outPath = 'face-info.csv'
 
