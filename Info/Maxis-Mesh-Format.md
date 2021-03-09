@@ -97,8 +97,6 @@ Offset | Type | Length | Description
 48 | Int? | 9 | Unknown. Being a multiple of three implies it may be a set of three special colours. Same value in all `max` files on a per-game basis: `00 00 80, 80 00 80, 00 80 80` for SimCopter, `22 D0 F0, 30 C7 C7, C7 76 C8` for Streets of SimCity.
 57 | Int | 4 | Address of start of colour data. Always 61 (0x3D).
 
----
-
 ### Colour
 
 Quantity: 256
@@ -110,8 +108,6 @@ Offset | Type | Length | Description
 0 | Int | 1 | Red value
 1 | Int | 1 | Green value
 2 | Int | 1 | Blue value
-
----
 
 ### Colour Map Images
 
@@ -140,8 +136,6 @@ Offset | Type | Length | Description
 845 | Int | 4 | Address of geometry table. Always 853.
 849 | Int | 4 | Address of duplicate geometry table. Always 853 + 53*N<sub>GTE</sub>
 
----
-
 ### Geometry Table Entry
 
 Quantity: N<sub>GTE</sub>
@@ -164,8 +158,6 @@ Offset | Type | Length | Description
 41 | Int | 4 | Number of faces.
 45 | Int | 4 | Number of unique vertices, including the "origin" vertex. This is the number of vertices stored in the corresponding object.
 49 | Int | 4 | Unknown. Always 0.
-
----
 
 ### Duplicate Geometry Table Entry
 
@@ -208,8 +200,6 @@ Offset | Type | Length | Description
 24 | Char | 88 | Name of object (null-terminated). If the name is shorter than 87 bytes, the bytes following the terminating null are also null.
 112 | ? | 12 | Unknown. Possibly a hash. If this value is changed, the game will crash with the error "ERROR: unable to get object [ID number]", where the ID number is the one from the duplicate geometry table.
 
----
-
 ### Vertex
 
 Quantity: N<sub>vertices</sub>
@@ -223,8 +213,6 @@ Offset | Type | Length | Description
 0 | Int | 4 | X coordinate
 4 | Int | 4 | Y coordinate
 8 | Int | 4 | Z coordinate
-
----
 
 ### Face
 
@@ -244,8 +232,6 @@ Offset | Type | Length | Description
 19 | Int | 1 | Colour map index, texture index, or index within texture atlas.
 20 | Int | 1 | If 0, face uses colour or dedicated texture. If non-zero, specifies index of texture containing texture atlas.
 
----
-
 #### Face Vertex Index
 
 Quantity: N<sub>face vertices</sub>
@@ -255,8 +241,6 @@ Offsets are relative to start of section.
 Offset | Type | Length | Description
 ---|---|---|---
 0 | Int | 2 | Vertex index in object's vertex list
-
----
 
 #### Face UV Coordinates
 
