@@ -192,10 +192,10 @@ Offset | Type | Length | Description
 8 | Int | 2 | Number of vertices (N<sub>vertices</sub>)
 10 | Int | 2 | Number of faces (N<sub>faces</sub>)
 12 | Int | 4 | Unknown. Always 0.
-16 | Int | 1 | Unknown. Seems to affect collision for some objects. See [here](https://github.com/CahootsMalone/maxis-mesh-stuff/blob/master/Info/Collision%20notes.md) for further thoughts.
-17 | Int | 1 | Unknown. Seems to affect collision for some objects.
-18 | Int | 1 | Unknown. Seems to affect collision for some objects.
-19 | Int | 1 | Unknown. Almost always zero. See [here](https://github.com/CahootsMalone/maxis-mesh-stuff/blob/master/Info/Collision%20notes.md) for details.
+16 | Int | 1 | Unknown. For ground pieces (1x1, 2x2, NxN, etc.), roughly (N*64) % 256. 
+17 | Int | 1 | Unknown. For ground pieces (1x1, 2x2, NxN, etc.), roughly (N*65) % 256. 
+18 | Int | 1 | Unknown. Affects collision: if 0, no collision. For ground pieces (1x1, 2x2, NxN, etc.), roughly (N*45). Generally proportional to the size of the object. See [here](https://github.com/CahootsMalone/maxis-mesh-stuff/blob/master/Info/Collision%20notes.md) for further thoughts.
+19 | Int | 1 | Unknown. Almost always zero. See notes linked above.
 20 | Int | 4 | Unknown. Always 0.
 24 | Char | 88 | Name of object (null-terminated). If the name is shorter than 87 bytes, the bytes following the terminating null are also null.
 112 | ? | 12 | Unknown. Possibly a hash. If this value is changed, the game will crash with the error "ERROR: unable to get object [ID number]", where the ID number is the one from the duplicate geometry table.
@@ -252,6 +252,8 @@ Offset | Type | Length | Description
 ---|---|---|---
 0 | Int | 4 | U coordinate. Divide by 65,536 to get value.
 4 | Int | 4 | V coordinate. Divide by 65,536 to get value.
+
+For faces textured using a dedicated texture (rather than one from a texture atlas), coordinates outside [0.0, 1.0] sometimes yield strange results: the face may be rendered using a dedicated texture adjacent to the one specified or random noise (perhaps out-of-range memory interpreted as a texture).
 
 # Notes
 
