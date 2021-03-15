@@ -18,12 +18,15 @@
 
 # --- TEXTURE OR COLOUR ASSIGNMENT: VERTEX GROUPS AND SPECIAL GROUP NAMES ---
 
-# The "specialGroups" dictionary (line 135) is used to specify textures or colours for vertex groups.
+# The "specialGroups" dictionary (line 138) is used to specify textures or colours for vertex groups.
 #   Key: name of vertex group
 #   Value: anonymous dictionary with the following key/value pairs:
 #       faceType: one of the FACE_TYPE_[...] strings defined below
 #       texFile: texture file value (0 for dedicated textures or colours)
 #       texIndex: texture index (colour index for untextured faces)
+
+# Faces with a given set of attributes should not share vertices with faces possessing attributes that differ.
+# Use Blender's "Split" operation (in Edit mode, select a face and press "Y") to disconnect faces.
 
 # --- COLOURS ---
 
