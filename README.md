@@ -10,6 +10,6 @@ Repository contents:
   * [Maxis Mesh Format Documentation](Info/Maxis-Mesh-Format.md): A description of the Maxis mesh format used for SimCopter and Streets of SimCity.
 * [Mesh Tools](Mesh-tools): Command-line tools to extract meshes from and replace meshes within Maxis mesh files.
 * [Processing](Processing): Scripts for use with [Processing](https://processing.org/), a Java-based graphics framework.
-  * [Maxis Mesh Viewer](Processing\maxis_mesh_viewer): A tool for viewing 3D models from SimCopter and Streets of SimCity. It can also export meshes to [Wavefront OBJ format](https://en.wikipedia.org/wiki/Wavefront_.obj_file).
+  * [Maxis Mesh Viewer](Processing/maxis_mesh_viewer): A tool for viewing 3D models from SimCopter and Streets of SimCity. It can also export meshes to [Wavefront OBJ format](https://en.wikipedia.org/wiki/Wavefront_.obj_file).
       ![Some of the meshes from SimCopter and Streets of SimCity viewed in the Maxis Mesh Viewer.](readme-assets/mmv-gallery.png)
 * [Python](Python): Python scripts to export models from Blender in Maxis mesh format and to tabulate details from Maxis mesh files.
