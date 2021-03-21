@@ -190,7 +190,7 @@ void draw() {
   cameraPitch = max(min(cameraPitch, 89), -89);
 
   // Default settings are described here: https://processing.org/reference/perspective_.html
-  perspective(PI/3f, width/height, 1f, 1000f);
+  perspective(PI/3f, (float) width/ (float) height, 1f, 1000f);
 }
 
 void mouseWheel(MouseEvent event) {
