@@ -8,6 +8,7 @@ Repository contents:
 * [C++](C++): Source code for the `mesh-extract` and `mesh-replace` command-line tools (executables are in the Mesh Tools folder; see below).
 * [Info](Info): Information regarding the mesh format used by SimCopter and Streets of SimCity.
   * [Maxis Mesh Format Documentation](Info/Maxis-Mesh-Format.md): A description of the Maxis mesh format used for SimCopter and Streets of SimCity.
+  * [Making Videos for SimCopter's Drive-In Movie Theatres](Info/Making-Videos-for-SimCopter's-Drive-In-Movie-Theatres.md): A comprehensive guide to creating videos for SimCopter's drive-in movie theatres, including discussion of an interesting bug.
 * [Mesh Tools](Mesh-tools): Command-line tools to extract meshes from and replace meshes within Maxis mesh files.
 * [Processing](Processing): Scripts for use with [Processing](https://processing.org/), a Java-based graphics framework.
   * [Maxis Mesh Viewer](Processing/maxis_mesh_viewer): A tool for viewing 3D models from SimCopter and Streets of SimCity. It can also export meshes to [Wavefront OBJ format](https://en.wikipedia.org/wiki/Wavefront_.obj_file).
