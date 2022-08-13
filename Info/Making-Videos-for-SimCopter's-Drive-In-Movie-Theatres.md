@@ -201,7 +201,7 @@ Given SimCopter's reputation for bugs, it's not entirely surprising that the gam
     
       > flip all frames [of the source video] vertically (or rotate 180 degrees), so the video clip actually plays back upside-down
     
-      As described in section 3.2 of the this document, technically the videos must be flipped vertically, not rotated 180 degrees (the two transformations are not equivalent).
+      As described in section 3.2 of this document, technically the videos must be flipped vertically, not rotated 180 degrees (the two transformations are not equivalent).
 * A FLIC file created by RAD Game Tools can be converted to a SMK2 file by the original Smacker tools. (As mentioned earlier, RAD Game Tools cannot create SMK2 files.)
 * Apparently several other old games also support SMK2 but not SMK4, including:
     * [The Myth series](https://en.wikipedia.org/wiki/Myth_(video_game_series)) ([forum thread](http://tain.totalcodex.net/forum/viewtopic.php?t=579))
