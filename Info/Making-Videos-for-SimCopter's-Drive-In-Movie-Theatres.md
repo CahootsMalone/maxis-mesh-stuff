@@ -157,7 +157,7 @@ The modified texture (with "TEST" oriented correctly) appears on the drive-in sc
 
 ![Modified texture on drive-in screen](images/drive-in-movie-theatre-test-texture.png "Modified texture on drive-in screen")
 
-To observe the effect of using a drive-in movie with a resolution that exceeds 32 x 32, I've created a video (`checkerboard.smk`, available [here](checkerboard.smk)) with a resolution of 80 x 80 pixels (80 = 1.5 * 32) that alternates between two inversely-coloured red and blue checkerboard patterns. Each square of the checkerboard is 32 x 32 pixels in size and numbered.
+To observe the effect of using a drive-in movie with a resolution that exceeds 32 x 32, I've created a video (`checkerboard.smk`, available [here](checkerboard.smk)) with a resolution of 80 x 80 pixels (80 = 2.5 * 32) that alternates between two inversely-coloured red and blue checkerboard patterns. Each square of the checkerboard is 32 x 32 pixels in size and numbered.
 
 Here's a frame from the video:
 
