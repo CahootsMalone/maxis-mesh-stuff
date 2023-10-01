@@ -59,7 +59,7 @@ Offset | Type | Length | Description
 ---|---|---|---
 0 | Char | 4 | File signature (DIRC)
 4 | Int | 4 | File size
-8 | Int | 4 | Unknown. Always 2.
+8 | Int | 4 | Unknown. Always 2. Likely the number of addresses to follow.
 
 ## Address of Colour Map (CMAP)
 
@@ -89,10 +89,10 @@ Within the colour map, each colour is three bytes in RGB order.
 
 Offset | Type | Length | Description
 ---|---|---|---
-28 | Char | 4 | CMAP
-32 | Int | 4 | Size of colour map. Always 801 (0x0321).
-36 | Int | 4 | Unknown. Always 1.
-40 | Char | 4 | CMAP
+28 | Char | 4 | CMAP (start of colour map section)
+32 | Int | 4 | Total size of colour map section. Always 801 (0x0321). If additional colour maps were present, would presumably include their size as well (12 for header plus 789 for each colour map).
+36 | Int | 4 | Unknown. Always 1. Likely the number of colour maps.
+40 | Char | 4 | CMAP (start of individual colour map)
 44 | Int? | 4 | Unknown. Possibly meant to be interpreted as two groups of two bytes or four individual bytes since treating it as a 32-bit integer (signed or unsigned) gives an apparently random value. Different for each of the three SimCopter `max` files, but the same for all three Streets of SimCity `max` files (`00 40 12 84`).
 48 | Int? | 9 | Unknown. Being a multiple of three implies it may be a set of three special colours. Same value in all `max` files on a per-game basis: `00 00 80, 80 00 80, 00 80 80` for SimCopter, `22 D0 F0, 30 C7 C7, C7 76 C8` for Streets of SimCity.
 57 | Int | 4 | Address of start of colour data. Always 61 (0x3D).
