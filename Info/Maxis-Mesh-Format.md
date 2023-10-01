@@ -113,6 +113,8 @@ Offset | Type | Length | Description
 
 Each game uses a single colour map that's repeated in each of its `max` files. Note the presence of 16-colour gradients within both colour maps: these are used for smooth-shaded faces (individual colours within them are also assigned to flat-shaded faces).
 
+The first and last 10 colours of SimCopter's colour map are [the 20 colours of the Windows system palette](https://en.wikipedia.org/wiki/List_of_software_palettes#Microsoft_Windows_default_20-color_palette) (these colours and the indices that contain them are reserved). The same range is occupied by a single shade of green in Streets' colour map (apart from the second-last colour being cyan, oddly, which is consistent with the system palette). It appears that Streets skips these ranges when loading its colour map, leaving the system palette as-is rather than overwriting it with green: some flat-shaded faces on its models are assigned indices in the system palette range and those faces aren't green in-game.
+
 SimCopter's colour map:
 
 ![SimCopter's colour map](images/colour-map-simcopter.png "SimCopter's colour map")

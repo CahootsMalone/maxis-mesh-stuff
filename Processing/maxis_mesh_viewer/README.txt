@@ -2,7 +2,7 @@ Instructions:
 
 1. Download the folder (maxis_mesh_viewer) containing this README.
     Quick way:
-        Go to https://downgit.github.io
+        Go to https://minhaskamal.github.io/DownGit (or use another means of downloading a single folder; see https://stackoverflow.com/a/18194523)
         Enter https://github.com/CahootsMalone/maxis-mesh-stuff/tree/master/Processing/maxis_mesh_viewer
         Click "Download"
     Alternatively, you can download the entire maxis-mesh-stuff repo from here: https://github.com/CahootsMalone/maxis-mesh-stuff
