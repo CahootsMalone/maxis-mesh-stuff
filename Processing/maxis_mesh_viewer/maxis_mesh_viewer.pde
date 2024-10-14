@@ -12,6 +12,7 @@ INSTRUCTIONS
   d. V key: Hide/show vertices and edges.
   e. G key: Hide/show coordinate frame gizmo.
   f. O key: Toggle rotation around mesh origin/world origin.
+  g. R key: Hide/show radius circle.
 4. Advanced controls:
   a. Up/down arrow keys: Increase/decrease colour map index offset.
   b. Tilde: Enter face type number for filtering.
@@ -51,6 +52,7 @@ final String MESH_EXPORT_PREFIX = "Maxis";
 boolean drawLinesAndVertices = true; // Toggled using V key.
 boolean showGizmo = true; // Toggled using G key.
 boolean rotateCameraAroundMeshOrigin = true; // Otherwise around world origin (0, 0, 0); toggled using O key.
+boolean showRadiusCircle = true; // Toggle using R key.
 
 boolean printFaceDetails = false;
 boolean useAlphaBlending = true;
@@ -60,6 +62,7 @@ final int STROKE_WEIGHT_WIREFRAME_LINES = 4;
 final int STROKE_WEIGHT_POINTS = 8; // Use for single-face points like lights.
 final color COLOR_WIREFRAME = color(255, 0, 255);
 final color COLOR_ORIGIN_VERTEX = color(255, 0, 0);
+final color COLOR_COLLISION_RADIUS_CIRCLE = color(255, 255, 0);
 
 byte[] bytesMeshFile;
 
@@ -114,7 +117,8 @@ void setup() {
 }
 
 void draw() {
-  background(0, 128, 255);
+  //background(0, 128, 255);
+  background(128, 128, 128);
   strokeWeight(STROKE_WEIGHT_WIREFRAME_LINES);
   textureMode(NORMAL);
   noStroke();
@@ -265,5 +269,9 @@ void keyPressed() {
 
   if (key == 'g') {
     showGizmo = !showGizmo;
+  }
+  
+  if (key == 'r') {
+    showRadiusCircle = !showRadiusCircle;
   }
 }

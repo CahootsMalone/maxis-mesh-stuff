@@ -2,6 +2,7 @@ class Mesh {
 
   private Vertex[] vertices;
   private Face[] faces;
+  private float collisionRadius; // Might be a rendering radius as well?
 
   public void loadMesh(byte[] bytesMeshFile, int[] meshStartOffsets, int index) {
     int meshTableStart = meshStartOffsets[index];
@@ -26,6 +27,11 @@ class Mesh {
     int mystery4 = byteToUInt8(bytesMeshFile[meshTableStart + 19]);
 
     println("Collision bytes? " + mystery1 + " " + mystery2 + " " + mystery3 + " " + mystery4);
+    
+    // Should actually be a UInt32, but no values are large enough for sign confusion so I just used the existing int32 method.
+    // Scale factor should be the same as VERTEX_SCALE_FACTOR in Vertex class (just hardcoded again here to save time).
+    collisionRadius = bytesToInt32(getByteRange(bytesMeshFile, meshTableStart + 16, 4)) / 262144.0;
+    println("Collision radius: " + collisionRadius);
 
     int vertexStart = meshTableStart + 124;
     int faceStart = vertexStart + (vertexCount*12);
@@ -239,6 +245,30 @@ class Mesh {
         }
 
         endShape();
+      }
+    }
+    
+    // Draw a circle for the object's radius.
+    if (showRadiusCircle) {
+      stroke(COLOR_COLLISION_RADIUS_CIRCLE);
+      strokeWeight(STROKE_WEIGHT_WIREFRAME_LINES);
+      
+      float originX = vertices[0].x;
+      float originZ = vertices[0].z;
+      
+      // Circle should be centred on origin (at least in the XZ plane).
+      // If not, circle location is visibly incorrect for models with an origin not near (0,0,0).
+      int circleSideCount = 16;
+      float circleSegmentAngle = (2*PI)/circleSideCount;
+      for (int i = 0; i < circleSideCount; ++i) {
+         float angleStart = i*circleSegmentAngle;
+         float angleEnd = (i+1)*circleSegmentAngle;
+         
+         float startX = collisionRadius * cos(angleStart);
+         float startZ = collisionRadius * sin(angleStart);
+         float endX = collisionRadius * cos(angleEnd);
+         float endZ = collisionRadius * sin(angleEnd);
+         line(originX + startX, 0, originZ + startZ, originX + endX, 0, originZ + endZ);
       }
     }
   }
