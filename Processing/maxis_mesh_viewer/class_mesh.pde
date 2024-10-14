@@ -256,8 +256,8 @@ class Mesh {
       float originX = vertices[0].x;
       float originZ = vertices[0].z;
       
-      // Circle should be centred on origin (at least in the XZ plane).
-      // If not, circle location is visibly incorrect for models with an origin not near (0,0,0).
+      // Circle should be centred on the origin vertex (at least in the XZ plane), not the coordinate system origin.
+      // If not, circle location is visibly incorrect for models with an origin vertex not near (0,0,0).
       int circleSideCount = 16;
       float circleSegmentAngle = (2*PI)/circleSideCount;
       for (int i = 0; i < circleSideCount; ++i) {
