@@ -193,20 +193,48 @@ Offset | Type | Length | Description
 4 | Int | 4 | Size of object minus 12. Presumably the 12-byte deficit is a bug.
 8 | Int | 2 | Number of vertices (N<sub>vertices</sub>)
 10 | Int | 2 | Number of faces (N<sub>faces</sub>)
-12 | Int | 4 | Unknown. Always 0.
-16 | Int | 1 | Unknown. For ground pieces (1x1, 2x2, NxN, etc.), roughly (N*64) % 256. 
-17 | Int | 1 | Unknown. For ground pieces (1x1, 2x2, NxN, etc.), roughly (N*65) % 256. 
-18 | Int | 1 | Unknown. Affects collision: if 0, no collision. For ground pieces (1x1, 2x2, NxN, etc.), roughly (N*45). Generally proportional to the size of the object. See [here](https://github.com/CahootsMalone/maxis-mesh-stuff/blob/master/Info/Collision%20notes.md) for further thoughts.
-19 | Int | 1 | Unknown. Almost always zero. See notes linked above.
-20 | Int | 4 | Unknown. Always 0.
+12 | Int | 4 | Unknown. Always 0. According to the prerelease PDB file (see below), likely a set of attribute flags that went unused.
+16 | Int | 4 | The radius of a bounding circle in the XZ (horizontal) plane specified using the same scale factor as vertex coordinates. The centre of the circle is the origin vertex (the first one in the object's vertex list). Affects how collision is handled: it seems that only vertices with XZ coordinates within the bounding circle are eligible to be used for collision checks. The details of how collision works are currently unknown (e.g., there are meshes for which some faces are ignored during collision checks, like the superstructure of the highway bridge in Streets).
+20 | Int | 4 | Unknown. Always 0. According to the prerelease PDB file (see below), radius along the Y (vertical) axis. Presumably unused given that it's always zero.
 24 | Char | 88 | Name of object (null-terminated). If the name is shorter than 87 bytes, the bytes following the terminating null are also null.
-112 | ? | 12 | Unknown. Possibly a hash. If this value is changed, the game will crash with the error "ERROR: unable to get object [ID number]", where the ID number is the one from the duplicate geometry table.
+112 | Int | 4 | Unknown. Wide range of values, typically fairly large. The prerelease PDB file (see below) seems to indicate that this is the object's animation count, but no objects in SimCopter or Streets are animated.
+116 | Int | 4 | Unknown. Wide range of values, typically fairly large. The prerelease PDB file (see below) seems to indicate that this is the object's animation pointer, but given the lack of animation
+120 | Int | 4 | An ID number. If this value is changed, the game will crash with the error "ERROR: unable to get object [ID number]", where the ID number is the one from the duplicate geometry table.
+
+### Example Bounding Circles
+
+The bounding circles of various SimCopter models rendered in [my Maxis mesh viewer](https://github.com/CahootsMalone/maxis-mesh-stuff/tree/master/Processing/maxis_mesh_viewer). The circles are centred on the X and Z coordinates of the origin vertex with a Y value of zero.
+
+![Example bounding circles of SimCopter models.](images/bounding-circle-examples-simcopter.png "Example bounding circles of SimCopter models.")
+
+### Object Header Definition for Prerelease Version of SimCopter
+
+The leaked prerelease version of SimCopter includes a [program database](https://en.wikipedia.org/wiki/Program_database) (PDB) file containing many type definitions, including one for the object header (defined at offset 2795617 in `COPTER_D.PDB`):
+
+```c++
+struct GameObjectHdrType {
+    char Id[4];
+    long Size;
+    short NVerts;
+    short NFaces;
+    ulong Attrib;
+    long Radius;
+    long YRadius;
+    char ObjName[24];
+    char TextureFile[64];
+    long ObjAnimCnt;
+    long ObjAnimPtr;
+    int ID;
+}
+```
+
+Thanks to maths22 in [the SimCopterX Discord server](http://krimsky.net/patchers.html) for pointing out that these type definitions are present and sharing the cleaned up `GameObjectHdrType` struct definition.
 
 ### Vertex
 
 Quantity: N<sub>vertices</sub>
 
-The first vertex in the list is never used for face definitions and appears to be an origin point (possibly from whatever 3D modeling software was used to create the meshes). Neither game seems to use it.
+The first vertex in the list is never used for face definitions and appears to be an origin point (possibly from whatever 3D modeling software was used to create the meshes). The radius specified in the object header (see above) defines a circle centred on the origin.
 
 Offsets are relative to start of section.
 
